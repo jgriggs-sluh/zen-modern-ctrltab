@@ -1,0 +1,8 @@
+[
+  {
+    "property": "zen.mods.modern-ctrltab.large-thumbnails",
+    "label": "Use larger thumbnails (220×150)",
+    "type": "checkbox",
+    "defaultValue": false
+  }
+]
