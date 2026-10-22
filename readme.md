@@ -14,7 +14,8 @@ Restyles Zen's Ctrl+Tab tab switcher, starting from
 It also makes Ctrl+Tab cycle through recently used tabs from **all spaces**,
 not just the current one. Picking a tab from another space switches to that
 space. Unloaded (sleeping) tabs are left out, as in stock Zen. This part is a
-script, so it needs Sine; the styling alone also works as userChrome.css.
+script, so it needs Sine; the styling alone also works as userChrome.css. For 
+this to work, you have to change Sine's settings to allow javascript from unofficial sources.
 
 ## Requirements
 
