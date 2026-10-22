@@ -1,13 +1,13 @@
 {
   "id": "modern-ctrltab-preview",
   "name": "Modern Ctrl+Tab Preview",
-  "description": "Restyles the Ctrl+Tab switcher into a rounded card tray with compact thumbnails and an accent-colored selection. Based on zen-browser/desktop PR #15078 by @gholts.",
+  "description": "Restyles the Ctrl+Tab switcher into a bright rounded tray with large thumbnails and a soft gray selection. Based on zen-browser/desktop PR #15078 by @gholts.",
   "homepage": "https://github.com/zen-browser/desktop/pull/15078",
   "style": "chrome.css",
   "readme": "readme.md",
   "preferences": "preferences.json",
   "author": "jgriggs",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "tags": ["tabs", "ui"],
   "createdAt": "2026-10-22",
   "updatedAt": "2026-10-22"

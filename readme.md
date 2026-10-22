@@ -1,13 +1,14 @@
 # Modern Ctrl+Tab Preview
 
-Restyles Zen's Ctrl+Tab tab switcher to match
+Restyles Zen's Ctrl+Tab tab switcher, starting from
 [zen-browser/desktop PR #15078](https://github.com/zen-browser/desktop/pull/15078)
 ("Modern Ctrl Tab Preview, CSS only") by [@gholts](https://github.com/gholts):
 
-- a single rounded tray with a light or dark background
-- compact 156×106 thumbnails, cropped to fill the tile
-- the favicon and title on one row under each thumbnail
-- the selected tab filled with your accent color
+- a single bright, rounded tray, whatever your browser theme
+- 200×128 thumbnails with a soft shadow, cropped to fill the tile
+- the favicon and title on one row under each thumbnail, cut off with "…"
+  when too long
+- the selected tab on a soft gray tile
 - squircle corners where your Zen build supports them
 
 ## Requirements
@@ -20,11 +21,12 @@ used order** is on (Settings → General → Tabs), which sets
 
 | Pref | Default | Effect |
 | --- | --- | --- |
-| `zen.mods.modern-ctrltab.large-thumbnails` | `false` | Uses 220×150 thumbnails instead of 156×106 |
+| `zen.mods.modern-ctrltab.large-thumbnails` | `false` | Uses 260×166 thumbnails instead of 200×128 |
 
 ## Install
 
 - **userChrome.css:** set `toolkit.legacyUserProfileCustomizations.stylesheets`
   to `true`, paste `chrome.css` into `<profile>/chrome/userChrome.css`, then
   restart Zen.
-- **Sine or another mod manager:** install it from this folder or repository.
+- **Sine:** enter `jgriggs-sluh/zen-modern-ctrltab` in Sine's install field in
+  Zen's Settings.

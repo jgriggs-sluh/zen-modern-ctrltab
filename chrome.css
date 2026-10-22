@@ -1,5 +1,6 @@
 /* Modern Ctrl+Tab Preview
- * Port of zen-browser/desktop PR #15078 by @gholts as a Zen Mod.
+ * Based on zen-browser/desktop PR #15078 by @gholts, restyled as a bright
+ * frosted tray with larger thumbnails and a soft gray selection.
  * https://github.com/zen-browser/desktop/pull/15078
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
@@ -7,11 +8,17 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
 
 #ctrlTab-panel {
-  --ctrlTab-thumbnail-width: 156px !important;
-  --ctrlTab-thumbnail-height: 106px !important;
-  --ctrlTab-preview-padding: 8px !important;
+  /* Always light, regardless of the browser theme */
+  color-scheme: light !important;
+  --ctrlTab-thumbnail-width: 200px !important;
+  --ctrlTab-thumbnail-height: 128px !important;
+  --ctrlTab-preview-padding: 12px !important;
+  --ctrlTab-tray-bg: rgb(246 247 250 / 96%);
+  --ctrlTab-tray-border: rgb(0 0 0 / 7%);
+  --ctrlTab-selected-bg: rgb(60 72 100 / 13%);
+  --ctrlTab-text: #24262b;
   --panel-background-color: transparent !important;
-  --panel-text-color: light-dark(#555, #bfbfbf) !important;
+  --panel-text-color: var(--ctrlTab-text) !important;
   --panel-border-color: transparent !important;
   --ctrlTab-estimated-canvas-height: round(
     round(up, 85vw / 7, 1px) * 19 / 28,
@@ -31,8 +38,8 @@
 /* Optional larger thumbnails (mod preference) */
 @media (-moz-pref("zen.mods.modern-ctrltab.large-thumbnails")) {
   #ctrlTab-panel {
-    --ctrlTab-thumbnail-width: 220px !important;
-    --ctrlTab-thumbnail-height: 150px !important;
+    --ctrlTab-thumbnail-width: 260px !important;
+    --ctrlTab-thumbnail-height: 166px !important;
   }
 }
 
@@ -44,15 +51,18 @@
       calc(var(--ctrlTab-thumbnail-width) + 2 * var(--ctrlTab-preview-padding))
     )
   ) !important;
-  gap: 0 !important;
+  gap: 6px !important;
   width: max-content !important;
   max-width: 100% !important;
   margin: auto !important;
-  padding: 8px !important;
-  background: light-dark(#f4f4f4, #2a2a2a) !important;
-  border: 1px solid light-dark(#c3c3c3, #3e3e3e) !important;
-  border-radius: 24px !important;
-  box-shadow: 0 3px 10px rgb(0 0 0 / 16%) !important;
+  padding: 16px !important;
+  background: var(--ctrlTab-tray-bg) !important;
+  border: 1px solid var(--ctrlTab-tray-border) !important;
+  border-radius: 28px !important;
+  box-shadow:
+    0 2px 6px rgb(0 0 0 / 8%),
+    0 16px 40px rgb(0 0 0 / 22%) !important;
+  backdrop-filter: blur(24px) saturate(160%);
 }
 
 #ctrlTab-panel #ctrlTab-previews,
@@ -65,17 +75,20 @@
   min-width: 0 !important;
   padding: 0 !important;
   text-shadow: none !important;
+  color: var(--ctrlTab-text) !important;
 }
 
 #ctrlTab-panel .ctrlTab-preview-inner {
   display: grid !important;
-  grid-template: var(--ctrlTab-thumbnail-height) 20px / 16px minmax(0, 1fr) !important;
-  gap: 8px 7px !important;
+  grid-template: var(--ctrlTab-thumbnail-height) 22px / 18px minmax(0, 1fr) !important;
+  gap: 12px 8px !important;
   align-items: center !important;
   margin: 0 !important;
   padding: var(--ctrlTab-preview-padding) !important;
   border: 0 !important;
-  border-radius: 14px !important;
+  border-radius: 16px !important;
+  background: transparent !important;
+  transition: background-color 80ms ease-out;
 }
 
 #ctrlTab-panel .ctrlTab-canvas {
@@ -86,9 +99,11 @@
   margin: 0 !important;
   overflow: hidden !important;
   color-scheme: inherit !important;
-  background: light-dark(white, #121212) !important;
+  background: white !important;
   border-radius: 8px !important;
-  box-shadow: 0 0 0 1px light-dark(rgb(0 0 0 / 7%), #363636) !important;
+  box-shadow:
+    0 0 0 1px rgb(0 0 0 / 6%),
+    0 2px 8px rgb(0 0 0 / 14%) !important;
 }
 
 #ctrlTab-panel .ctrlTab-canvas > :is(img, canvas) {
@@ -101,55 +116,47 @@
 
 #ctrlTab-panel .ctrlTab-favicon-container {
   grid-area: 2 / 1 !important;
-  margin-left: 4px !important;
+  margin-left: 2px !important;
 }
 
 #ctrlTab-panel .ctrlTab-favicon-container,
 #ctrlTab-panel .ctrlTab-favicon {
-  width: 16px !important;
-  height: 16px !important;
+  width: 18px !important;
+  height: 18px !important;
 }
 
 #ctrlTab-panel .ctrlTab-favicon {
   margin: 0 !important;
   padding: 0 !important;
   border: 0 !important;
-  border-radius: 3px !important;
+  border-radius: 4px !important;
   background: transparent !important;
   box-shadow: none !important;
 }
 
 #ctrlTab-panel .ctrlTab-favicon:not([src]),
 #ctrlTab-panel .ctrlTab-favicon[src=""] {
-  background: #aaa !important;
+  background: #d4d6dc !important;
 }
 
+/* Selected tab: a soft gray tile instead of the accent color */
 #ctrlTab-panel .ctrlTab-preview:focus > .ctrlTab-preview-inner {
-  background: var(--color-accent-primary, var(--zen-primary-color)) !important;
-  /* Fallback for builds without contrast-color() */
-  color: white !important;
-  color: contrast-color(var(--color-accent-primary, var(--zen-primary-color))) !important;
-  border-radius: 14px !important;
+  background: var(--ctrlTab-selected-bg) !important;
+  color: var(--ctrlTab-text) !important;
+  border-radius: 16px !important;
   box-shadow: none !important;
-}
-
-#ctrlTab-panel .ctrlTab-preview:focus .ctrlTab-canvas {
-  box-shadow: 0 0 0 1px light-dark(rgb(0 0 0 / 7%), transparent) !important;
-}
-
-@media (-moz-platform: windows) {
-  #ctrlTab-panel .ctrlTab-canvas,
-  #ctrlTab-panel .ctrlTab-preview:focus .ctrlTab-canvas {
-    box-shadow: none !important;
-  }
 }
 
 #ctrlTab-panel .ctrlTab-label {
   grid-area: 2 / 2 !important;
-  margin: 0 0 0 4px !important;
+  margin: 0 0 0 6px !important;
+  color: var(--ctrlTab-text) !important;
   font:
-    500 14px/20px -apple-system,
+    500 15px/22px -apple-system,
     system-ui,
     sans-serif !important;
   text-align: start !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
