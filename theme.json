@@ -7,7 +7,12 @@
   "readme": "readme.md",
   "preferences": "preferences.json",
   "author": "jgriggs",
-  "version": "1.1.0",
+  "scripts": {
+    "ctrltab-all-spaces.uc.js": {
+      "include": ["chrome://browser/content/browser.xhtml"]
+    }
+  },
+  "version": "1.2.0",
   "tags": ["tabs", "ui"],
   "createdAt": "2026-10-22",
   "updatedAt": "2026-10-22"

@@ -11,6 +11,11 @@ Restyles Zen's Ctrl+Tab tab switcher, starting from
 - the selected tab on a soft gray tile
 - squircle corners where your Zen build supports them
 
+It also makes Ctrl+Tab cycle through recently used tabs from **all spaces**,
+not just the current one. Picking a tab from another space switches to that
+space. Unloaded (sleeping) tabs are left out, as in stock Zen. This part is a
+script, so it needs Sine; the styling alone also works as userChrome.css.
+
 ## Requirements
 
 The switcher panel only appears when **Ctrl+Tab cycles through tabs in recently
@@ -22,11 +27,12 @@ used order** is on (Settings → General → Tabs), which sets
 | Pref | Default | Effect |
 | --- | --- | --- |
 | `zen.mods.modern-ctrltab.large-thumbnails` | `false` | Uses 260×166 thumbnails instead of 200×128 |
+| `zen.mods.modern-ctrltab.all-spaces` | `true` | Includes tabs from all spaces (Sine only) |
 
 ## Install
 
-- **userChrome.css:** set `toolkit.legacyUserProfileCustomizations.stylesheets`
-  to `true`, paste `chrome.css` into `<profile>/chrome/userChrome.css`, then
-  restart Zen.
+- **userChrome.css (styling only):** set
+  `toolkit.legacyUserProfileCustomizations.stylesheets` to `true`, paste
+  `chrome.css` into `<profile>/chrome/userChrome.css`, then restart Zen.
 - **Sine:** enter `jgriggs-sluh/zen-modern-ctrltab` in Sine's install field in
   Zen's Settings.

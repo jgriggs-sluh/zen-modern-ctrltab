@@ -4,5 +4,11 @@
     "label": "Use larger thumbnails (260×166)",
     "type": "checkbox",
     "defaultValue": false
+  },
+  {
+    "property": "zen.mods.modern-ctrltab.all-spaces",
+    "label": "Include tabs from all spaces",
+    "type": "checkbox",
+    "defaultValue": true
   }
 ]
